@@ -14,11 +14,14 @@
     @Styles.Render("~/bundles/css")
 </head>
 <body>
-    <div>
-        <h1>Navigation: </h1>
+    <div class="container">
+        <h5>Navigation: </h5>
         @Html.ActionLink("Home", "Index", "Home") <!--Text Name, View Name, Controller Name-->
+        @Html.ActionLink("Link Details", "Details", "Link")
+        @Html.ActionLink("Account Information", "Details", "KingsleyAccount")
+        @Html.ActionLink("Register", "Register", "Account")
     </div>
-    <div>
+    <div class="container">
         @RenderBody()
     </div>
 

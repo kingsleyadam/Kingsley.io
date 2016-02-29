@@ -1,0 +1,54 @@
+﻿@model Kingsley.io.Models.ContactSubmit
+
+@{
+    ViewBag.Title = "_Contact";
+}
+
+@if (ViewBag.Success != "1")
+{
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Need some information? Send us a message.
+                    </div>
+                    <div class="panel-body">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirstName)
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger display-none" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.LastName)
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last Name" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger display-none" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email)
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger display-none" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Message)
+                            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @rows = "3" } })
+                            @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger display-none" })
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <input type="submit" value="Submit" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+else
+{
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="alert alert-success" role="alert"><strong>Success!</strong> You've successfully sent us a message. It'll go directly to our inbox. We'll respond to you as soon as we can.</div>
+        </div>
+    </div>
+}
