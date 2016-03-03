@@ -1,14 +1,16 @@
 ﻿@model Kingsley.io.Models.ContactSubmit
 
+@using System.Web.Optimization
+
 @{
-    ViewBag.Title = "_Contact";
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Splash.cshtml";
 }
 
-@if (ViewBag.Success != "1")
-{
-    <form method="post">
+<div id="formSection">
+    <form method="post" id="contactForm">
         <div class="row">
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-md-6 col-md-offset-3">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         Need some information? Send us a message.
@@ -32,23 +34,55 @@
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(model => model.Message)
-                            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @rows = "3" } })
+                            @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "form-control", @rows = "3", @maxlengh = "1000", @data_bind = "value:message,valueUpdate:'input'" } })
+                            @*@Html.TextBoxFor(model => model.Message, new { @class = "form-control", @rows = "3", @maxlengh = "1000", @data_bind = "value:message" })*@
                             @Html.ValidationMessageFor(model => model.Message, "", new { @class = "text-danger display-none" })
+                            <span data-bind="text:charactersRemaining"></span> characters remaining
                         </div>
                     </div>
                     <div class="panel-footer">
-                        <input type="submit" value="Submit" class="btn btn-default" />
+                        <input type="submit" id="submit" value="Send" class="btn btn-default" data-loading-text="Sending..." />
                     </div>
                 </div>
             </div>
         </div>
     </form>
-}
-else
+
+</div>
+
+@section Scripts
 {
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <div class="alert alert-success" role="alert"><strong>Success!</strong> You've successfully sent us a message. It'll go directly to our inbox. We'll respond to you as soon as we can.</div>
-        </div>
-    </div>
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/knockout")
+
+    <script>
+        function ContactViewModel() {
+            var self = this;
+            self.message = ko.observable('');
+            self.charactersRemaining = ko.computed(function () {
+                return 1000 - self.message().length});
+        }
+        ko.applyBindings(new ContactViewModel());
+    </script>
+    <script>
+        $('#contactForm').submit(function () {
+            if ($(this).valid()) {
+                $('#submit').button('loading')
+
+                var values =
+                {
+                    "FirstName": $('#@Html.IdFor(model => model.FirstName)').val(),
+                    "LastName": $('#@Html.IdFor(model => model.LastName)').val(),
+                    "Email": $('#@Html.IdFor(model => model.Email)').val(),
+                    "Message": $('#@Html.IdFor(model => model.Message)').val()
+                };
+
+                $.post('@Url.Action("Contact")', values)
+                    .done(function (response) {
+                        $('#formSection').html(response);
+                    });
+            }
+            return false;
+        });
+    </script>
 }

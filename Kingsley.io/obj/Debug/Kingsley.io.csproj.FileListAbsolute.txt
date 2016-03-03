@@ -126,3 +126,4 @@ C:\Users\IBM_ADMIN\Source\Repos\Kingsley.io\Kingsley.io\obj\Debug\Kingsley.io.Mi
 C:\Users\IBM_ADMIN\Source\Repos\Kingsley.io\Kingsley.io\obj\Debug\Kingsley.io.csproj.GenerateResource.Cache
 C:\Users\IBM_ADMIN\Source\Repos\Kingsley.io\Kingsley.io\obj\Debug\Kingsley.io.Migrations.KingsleyAccountChanges.resources
 C:\Users\IBM_ADMIN\Source\Repos\Kingsley.io\Kingsley.io\obj\Debug\Kingsley.io.Migrations.ContactSubmitChanges.resources
+C:\Users\IBM_ADMIN\Source\Repos\Kingsley.io\Kingsley.io\obj\Debug\Kingsley.io.Migrations.UpdateContactSubmitMessageLength.resources

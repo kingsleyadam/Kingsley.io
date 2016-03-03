@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace Kingsley.io.Controllers
 {
+    [Authorize]
     public class KingsleyAccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         // GET: KingsleyAccount
         public ActionResult Index()
         {
@@ -18,8 +21,23 @@ namespace Kingsley.io.Controllers
         // GET: KingsleyAccount/Details/5
         public ActionResult Details()
         {
-            var kingsleyAccount = new KingsleyAccount { FirstName = "Adam", LastName = "Kingsley", JoinDate = DateTime.Now };
+            var userId = User.Identity.GetUserId();
+            var kingsleyAccount = db.KingsleyAccounts.Where(c => c.ApplicationUserID == userId).First();
             return View(kingsleyAccount);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult DetailsForAdmin(int id)
+        {
+            var kingsleyAccount = db.KingsleyAccounts.Find(id);
+
+            return View("Details", kingsleyAccount);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult List()
+        {
+            return View(db.KingsleyAccounts.ToList());
         }
 
         // GET: KingsleyAccount/Create

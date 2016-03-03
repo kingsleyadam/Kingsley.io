@@ -15,14 +15,20 @@
 </head>
 <body>
     <div class="container">
-        <h5>Navigation: </h5>
-        @Html.ActionLink("Home", "Index", "Home") <!--Text Name, View Name, Controller Name-->
-        @Html.ActionLink("Link Details", "Details", "Link")
-        @Html.ActionLink("Account Information", "Details", "KingsleyAccount")
-        @Html.ActionLink("Register", "Register", "Account")
-    </div>
-    <div class="container">
-        @RenderBody()
+        <div class="row">
+            <div class="btn-group" role="group">
+                @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" }) <!--Text Name, View Name, Controller Name-->
+                @Html.ActionLink("Link Details", "Details", "Link", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Account Information", "Details", "KingsleyAccount", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+        <div class="row">
+            @RenderBody()
+        </div>
+        <div class="row">
+            @Html.Partial("_LoginPartial")
+        </div>
     </div>
 
     <!-- Pull our scripts from App_Start>BundleConfig.cs -->
