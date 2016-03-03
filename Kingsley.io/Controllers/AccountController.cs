@@ -156,9 +156,10 @@ namespace Kingsley.io.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, model.FirstName));
                     var service = new KingsleyAccountService(HttpContext.GetOwinContext().Get<ApplicationDbContext>());
-                    service.CreateKingsleyAccount(model.FirstName, model.LastName, user.Id);
+                    KingsleyAccount ka = service.CreateKingsleyAccount(model.FirstName, model.LastName, user.Id);
+
+                    UserManager.AddClaim(user.Id, new Claim(ClaimTypes.GivenName, ka.Name));
 
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 

@@ -15,13 +15,15 @@ namespace Kingsley.io.Services
             db = dbContext;
         }
 
-        public void CreateKingsleyAccount(string firstName, string lastName, string userID)
+        public KingsleyAccount CreateKingsleyAccount(string firstName, string lastName, string userID)
         {
             var db = new ApplicationDbContext();
             var kingsleyAccount = new KingsleyAccount { FirstName = firstName, LastName = lastName, JoinDate = DateTime.Now, ApplicationUserID = userID };
 
             db.KingsleyAccounts.Add(kingsleyAccount);
             db.SaveChanges();
+
+            return kingsleyAccount;
         }
     }
 }

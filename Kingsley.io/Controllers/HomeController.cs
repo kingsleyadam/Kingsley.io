@@ -46,7 +46,7 @@ namespace Kingsley.io.Controllers
                 if (!System.Web.HttpContext.Current.IsDebuggingEnabled)
                 { 
                     SendEmailService es = new SendEmailService();
-                    es.SendOneEmail(cSubmit.Email, "adam@kingsley.io", "Kingsley.io - Contact Form Submission", cSubmit.Name + " (" + cSubmit.Email + ") has submited the contact form on Kingsley.io. <br /><br /><strong>Message:</strong>" + cSubmit.Message, true);
+                    es.SendOneEmail(cSubmit.Email, "adam@kingsley.io", "Kingsley.io - Contact Form Submission", cSubmit.Name + " (" + cSubmit.Email + ") has submited the contact form on Kingsley.io. <br /><br /><strong>Message:</strong><br />" + cSubmit.Message, true);
                 }
             }
 
