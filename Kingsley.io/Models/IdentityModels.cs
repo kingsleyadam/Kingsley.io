@@ -34,5 +34,9 @@ namespace Kingsley.io.Models
         public DbSet<KingsleyAccount> KingsleyAccounts { get; set; }
 
         public DbSet<ContactSubmit> ContactSubmits { get; set; }
+
+        public DbSet<Link> Links { get; set; }
+
+        public DbSet<LinkType> LinkTypes { get; set; }
     }
 }

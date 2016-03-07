@@ -20,8 +20,9 @@ namespace Kingsley.io.Models
         [Display(Name = "Full Address")]
         public string Address { get; set; }
 
+        public virtual LinkType type { get; set; }
+
         [Required]
-        [Display(Name = "Link Type")]
-        public int TypeID { get; set; }
+        public int LinkTypeID { get; set; }
     }
 }

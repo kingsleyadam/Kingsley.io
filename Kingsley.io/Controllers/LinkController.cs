@@ -18,8 +18,7 @@ namespace Kingsley.io.Controllers
         // GET: Link/Details/5
         public ActionResult Details()
         {
-            var link = new Link { Name = "Google.com", Address = "http://google.com", TypeID = 1 };
-            return View(link);
+            return View();
         }
 
         // GET: Link/Create
